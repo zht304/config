@@ -1,5 +1,4 @@
 (global-set-key (kbd "C-x C-b") 'ibuffer)
-(setq global-mark-ring-max 32)
 
 
 (require 'package)
@@ -17,7 +16,7 @@
 
 ;; my modules load
 (add-to-list 'load-path "~/.emacs.d/custom/")
-(mapc 'load (directory-files "~/.emacs.d/custom" t ".*\.el"))
+(mapc 'load (directory-files "~/.emacs.d/custom" t ".*\.el$"))
 
 (require 'setup-applications)
 (require 'setup-communication)

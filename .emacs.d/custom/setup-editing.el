@@ -25,19 +25,20 @@
  )
 
 ;; whitespace show in diff-mode
-(add-hook 'diff-mode-hook (lambda ()
-			    (setq-local whitespace-style
-					'(face
-					  tabs
-					  tab-mark
-					  spaces
-					  space-mark
-					  trailingg
-					  indentation::space
-					  indentation::tab
-					  newline
-					  newline-mark))
-			    (whitespace-mode 1)))
+(add-hook 'diff-mode-hook
+          (lambda ()
+            (setq-local whitespace-style
+                        '(face
+                          tabs
+                          tab-mark
+                          spaces
+                          space-mark
+                          trailingg
+                          indentation::space
+                          indentation::tab
+                          newline
+                          newline-mark))
+            (whitespace-mode 1)))
 
 ;;; built-in commands customized
 ;;; customized function
@@ -102,5 +103,153 @@ Only modes that don't derive from 'prog-mode' should be listed here")
 (defvar yank-indent-blacklisted-modes
   '(python-mode slim-mode halm-mode)
   "Modes for which auto-indenting is suppressed.")
+
+
+(defvar yank-advised-indent-threshold 1000
+  "Threshold (chars ) over which indentation does not auto occur")
+
+(defun yank-advised-indent-function (beg end)
+  "Do indentation as long as the region is not too large."
+  (if (<= (- end beg) yank-advised-indent-threshold)
+      (indent-region beg end nil)))
+
+(defadvice yank (after yank-indent activate)
+  "If current mode is one of the 'yank-indent-modes, indent
+yanked text (with prefix arg doesn't indent)."
+  (if(and (not (ad-get-arg 0))
+          (not (member major-mode yank-indent-blacklisted-modes))
+          (or (derived-mode-p 'prog-mode)
+              (member major-mode yank-indent-modes)))
+      (let ((transient-mark-mode nil))
+        (yank-advised-indent-function (region-beginning) (region-end)))))
+
+(defadvice yank-pop (after yank-pop-indent activate)
+  "If current mode is one of the 'yank-indent-modes, indent
+yanked text (with prefix arg doesn't indent)."
+  (if(and (not (ad-get-arg 0))
+          (not (member major-mode yank-indent-blacklisted-modes))
+          (or (derived-mode-p 'prog-mode)
+              (member major-mode yank-indent-modes)))
+      (let ((transient-mark-mode nil))
+        (yank-advised-indent-function (region-beginning) (region-end)))))
+
+;;
+(defun prelude-duplicate-current-line-or-region (arg)
+  "Duplicate the current line or region ARG times.
+If there is no region, the current line will be duplicated. However, if
+there's a region, all lines that region covers will be duplicated.
+The duplicated contents are appened after the next line of the origin
+line"
+  (interactive "p")
+  (pcase-let* ( (origin (point))
+                (`(,beg . ,end) (prelude-get-positions-of-line-or-region))
+                (region (buffer-substring-no-properties beg end)))
+    (-dotimes arg
+      (lambda (n) "duplicate"
+        (goto-char end)
+        (newline)
+        (insert region)
+        (setq end (point))))
+    (goto-char (+ origin (* (length region) arg) arg))))
+
+
+(defun prelude-get-positions-of-line-or-region ()
+  "Return positions (beg . end) of the current line or region."
+  (let (beg end) ;nil two var
+    (if (and mark-active (> (point) (mark)))
+        (exchange-point-and-mark))
+    (setq beg (line-beginning-position))
+    (if mark-active
+        (exchange-point-and-mark))
+    (setq end (line-end-position))
+    (cons beg end)))
+
+
+(defun indent-buffer()
+  "Indent the current buffer."
+  (interactive)
+  (indent-region (point-min) (point-max)))
+
+
+(defcustom prelude-indent-sensitive-modes
+  '(coffee-mode python-mode slim-mode halm-mode yaml-mode)
+  "Modes for which auto-indenting is suppressed."
+  :type 'list)
+
+(defun indent-region-or-buffer ()
+  "Indent a region if selected. otherwise the whole buffer."
+  (interactive)
+  (unless (member major-mode prelude-indent-sensitive-modes)
+    (save-excursion
+      (if (region-active-p)
+          (progn
+            (indent-region (region-beginning) (region-end))
+            (message "Indenting selected region.")
+            )
+        (progn
+          (indent-buffer)
+          (message "Indent buffer.")
+          )
+        (whitespace-cleanup)))))
+
+(global-set-key (kbd "C-c i") 'indent-region-or-buffer)
+
+;; kill the current buffer
+(defun kill-default-buffer ()
+  "Kill the currently active buffer"
+  (interactive)
+  (let (kill-buffer-query-functions)
+    (kill-buffer)))
+
+(global-set-key (kbd "C-x k") 'kill-default-buffer)
+
+(defun prelude-smart-open-line (arg)
+  "Insert an empty line after the current line.
+Position the cursion at its beginning. according to the current
+mode. With a prefix ARG open line above the current line."
+  (interactive "P")
+  (if arg
+      (prelude-smart-open-line-above)
+    (progn
+      (move-end-of-line nil)
+      (newline-and-indent))))
+
+
+(defun prelude-smart-open-line-above ()
+  "Insert an empty line before the current line.
+Position the cursor at its begining."
+  (interactive)
+  (progn
+    (move-beginning-of-line nil)
+    (newline-and-indent)
+    (forward-line -1)
+    (indent-according-to-mode)))
+
+(global-set-key (kbd "C-o") 'prelude-smart-open-line)
+(global-set-key (kbd "M-o") 'open-line)
+
+;; dulicate thing...
+(require 'duplicate-thing)
+(global-set-key (kbd "M-c") 'duplicate-thing)
+
+(require 'volatile-highlights)
+(volatile-highlights-mode t)
+
+
+(require 'smartparens-config)
+(setq sp-base-key-bindings 'paredit)
+(setq sp-autoskip-closing-pair 'always)
+(setq sp-hybrid-kill-entire-symbol nil)
+(sp-use-paredit-bindings)
+
+
+(require 'clean-aindent-mode)
+(add-hook 'prog-mode-hook 'clean-aindent-mode)
+
+
+
+
+
+
 
 
