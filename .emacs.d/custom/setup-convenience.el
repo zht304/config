@@ -27,7 +27,7 @@
 (global-hl-line-mode)
 
 ;; GROUP: Convenience -> Ibuffer
-(setq ibuffer-use-other-window t) ;; always display ibuffer in another window
+;;(setq ibuffer-use-other-window t) ;; always display ibuffer in another window
 
 ;; GROUP: Convenience -> Linum
 (add-hook 'prog-mode-hook 'linum-mode) ;; enable linum only in programming modes
