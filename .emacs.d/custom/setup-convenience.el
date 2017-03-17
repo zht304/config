@@ -50,13 +50,17 @@
 ;;                               ;;
 ;; GROUP: Convenience -> Company ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-hook 'after-init-hook 'global-company-mode)
+(use-package company
+  :ensure t
+  :config 
+  (add-hook 'after-init-hook 'global-company-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Package: expand-region                       ;;
 ;;                                              ;;
 ;; GROUP: Convenience -> Abbreviation -> Expand ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(require 'expand-region)
-(global-set-key (kbd "M-m") 'er/expand-region)
+(use-package expand-region
+  :bind ("M-m" . er/expand-region))
+
 

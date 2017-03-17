@@ -229,27 +229,26 @@ Position the cursor at its begining."
 (global-set-key (kbd "M-o") 'open-line)
 
 ;; dulicate thing...
-(require 'duplicate-thing)
-(global-set-key (kbd "M-c") 'duplicate-thing)
+(use-package duplicate-thing
+  :ensure t
+  :bind ("M-c" . duplicate-thing))
 
-(require 'volatile-highlights)
-(volatile-highlights-mode t)
-
-
-(require 'smartparens-config)
-(setq sp-base-key-bindings 'paredit)
-(setq sp-autoskip-closing-pair 'always)
-(setq sp-hybrid-kill-entire-symbol nil)
-(sp-use-paredit-bindings)
+(use-package volatile-highlights
+  :ensure t
+  :config 
+(volatile-highlights-mode t))
 
 
-(require 'clean-aindent-mode)
-(add-hook 'prog-mode-hook 'clean-aindent-mode)
+(use-package smartparens
+  :ensure t
+  :init
+   (setq sp-base-key-bindings 'paredit)
+   (setq sp-autoskip-closing-pair 'always)
+   (setq sp-hybrid-kill-entire-symbol nil)
+  :config (sp-use-paredit-bindings))
 
 
-
-
-
-
-
-
+(use-package clean-aindent-mode
+  :ensure t
+  :config 
+  (add-hook 'prog-mode-hook 'clean-aindent-mode))

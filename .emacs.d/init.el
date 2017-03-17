@@ -5,12 +5,13 @@
 (setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
                          ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")))
 (package-initialize)
-(add-hook 'c-mode-common-hook
-	  (lambda ()
-	    (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
-	      (ggtags-mode 1))))
+(if (not (package-installed-p 'use-package))
+    (progn (package-refresh-contents)
+	   (package-install 'use-package)))
+(require 'use-package)
 
-(add-hook 'dired-mode-hook 'ggtags-mode)
+
+;;(add-hook 'dired-mode-hook 'ggtags-mode)
 
 
 ;; my modules load
@@ -35,5 +36,6 @@
 
 ;; package: workgroups2
 
-(require 'workgroups2)
-(workgroups-mode 1)
+(use-package workgroups2
+  :ensure t
+  :config (workgroups-mode 1))
