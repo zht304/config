@@ -9,7 +9,13 @@ sudo apt-get install git
 sudo apt-get install emacs
 git config --global user.email "taocpp@gmail.com"
 git config --global user.name "thomaszhang"
-git clone http://github.com/zht304/config.git ~/config
+if [ ! -d ~/config ]; then
+	git clone http://github.com/zht304/config.git ~/config
+fi
+
+if [ ! -d ~/emacs.d ]; then
+	git clone https://github.com/syl20bnr/spacemacs.git ~/spacemacs
+fi
 cd ~/config
 cp .spacemacs ~/
 cp .vimrc ~/
