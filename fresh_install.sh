@@ -14,7 +14,7 @@ if [ ! -d ~/config ]; then
 fi
 
 if [ ! -d ~/emacs.d ]; then
-	git clone https://github.com/syl20bnr/spacemacs.git ~/spacemacs
+	git clone https://github.com/syl20bnr/spacemacs.git ~/.emacs.d
 fi
 cd ~/config
 cp .spacemacs ~/
