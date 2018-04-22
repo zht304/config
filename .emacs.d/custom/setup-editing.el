@@ -1,5 +1,3 @@
-(provide 'setup-editing)
-
 ;; GROUP: editing basic
 (setq global-mark-ring-max 5000  ; increase mark ring
       mark-ring-max 5000         ; increase mark ring
@@ -252,3 +250,5 @@ Position the cursor at its begining."
   :ensure t
   :config 
   (add-hook 'prog-mode-hook 'clean-aindent-mode))
+
+(provide 'setup-editing)

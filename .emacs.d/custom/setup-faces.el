@@ -1,1 +1,1 @@
-(provide 'setup-faces-and-ui)
+(provide 'setup-faces)
