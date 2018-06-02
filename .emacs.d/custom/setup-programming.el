@@ -16,4 +16,13 @@
 
 ;;(gtags/init-ggtags)
 
+
+;;;;;;;;;;;;;; python;;;
+(use-package elpy)
+(use-package py-autopep8)
+
+(elpy-enable)
+(require 'py-autopep8 )
+(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+
  (provide 'setup-programming)

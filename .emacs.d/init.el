@@ -62,7 +62,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (zygospore workgroups2 helm-gtags helm yasnippet smartparens ws-butler volatile-highlights use-package undo-tree iedit dtrt-indent counsel-projectile company clean-aindent-mode anzu duplicate-thing function-args))))
+    (py-autopep8 elpy better-defaults material-theme zygospore workgroups2 helm-gtags helm yasnippet smartparens ws-butler volatile-highlights use-package undo-tree iedit dtrt-indent counsel-projectile company clean-aindent-mode anzu duplicate-thing function-args))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
