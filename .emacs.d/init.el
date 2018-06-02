@@ -44,6 +44,7 @@
 (require 'setup-programming)
 (require 'setup-text)
 (require 'setup-local)
+(require 'p4)
 
 ;;function-args
 (require 'function-args)
