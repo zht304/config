@@ -50,6 +50,8 @@
 (require 'function-args)
 (fa-config-default)
 
+(use-package evil
+              :config (evil-mode 1))
 ;; package: workgroups2
 
 ;;(use-package workgroups2
