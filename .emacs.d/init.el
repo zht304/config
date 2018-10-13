@@ -47,7 +47,7 @@
 (require 'p4)
 
 ;;function-args
-(require 'function-args)
+(use-package function-args)
 (fa-config-default)
 
 (use-package evil

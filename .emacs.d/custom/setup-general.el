@@ -1,5 +1,5 @@
-(menu-bar-mode -1)
-(tool-bar-mode -1)
+;;(menu-bar-mode -1)
+;;(tool-bar-mode -1)
 
 (setq gc-cons-threshold 100000000)
 (setq inhibit-startup-message t)
