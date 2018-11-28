@@ -5,6 +5,8 @@
       )
 
 (setq-default tab-width 4)
+(setq c-default-style "linux")
+(setq c-basic-offset 4)
 
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)

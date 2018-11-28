@@ -46,12 +46,15 @@
 (require 'setup-local)
 (require 'p4)
 
+(require 'ansi-color)
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+
 ;;function-args
 (use-package function-args)
 (fa-config-default)
 
 (use-package evil
-              :config (evil-mode 1))
+              :config (evil-mode 0))
 ;; package: workgroups2
 
 ;;(use-package workgroups2
@@ -62,6 +65,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("732b807b0543855541743429c9979ebfb363e27ec91e82f463c91e68c772f6e3" default)))
  '(package-selected-packages
    (quote
     (py-autopep8 elpy better-defaults material-theme zygospore workgroups2 helm-gtags helm yasnippet smartparens ws-butler volatile-highlights use-package undo-tree iedit dtrt-indent counsel-projectile company clean-aindent-mode anzu duplicate-thing function-args))))
