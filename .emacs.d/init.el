@@ -60,6 +60,13 @@
 ;;(use-package workgroups2
 ;;  :ensure t
 ;;  :config (workgroups-mode 1))
+
+;;org-mode
+(use-package org)
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-log-done t)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -70,7 +77,7 @@
     ("732b807b0543855541743429c9979ebfb363e27ec91e82f463c91e68c772f6e3" default)))
  '(package-selected-packages
    (quote
-    (py-autopep8 elpy better-defaults material-theme zygospore workgroups2 helm-gtags helm yasnippet smartparens ws-butler volatile-highlights use-package undo-tree iedit dtrt-indent counsel-projectile company clean-aindent-mode anzu duplicate-thing function-args))))
+    (org-mode eterm-256color py-autopep8 elpy better-defaults material-theme zygospore workgroups2 helm-gtags helm yasnippet smartparens ws-butler volatile-highlights use-package undo-tree iedit dtrt-indent counsel-projectile company clean-aindent-mode anzu duplicate-thing function-args))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

@@ -17,6 +17,8 @@
 (delete-selection-mode)
 (global-set-key (kbd "RET") 'newline-and-indent)
 
+;; truncate by default
+(toggle-truncate-lines 1)
 
 ;; GROUP: Killing
 (setq
