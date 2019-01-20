@@ -48,6 +48,7 @@ ln -s config/.vimrc .vimrc
 
 if [ ! -d tools ]; then
 	git clone http://github.com/zht304/tools.git
+    sudo ln -s /home/thomas/tools/myp4 /usr/bin/myp4
 fi
 
 sudo cat >> /etc/locale.gen <<EOF
@@ -69,9 +70,11 @@ alias ec='emacsclient -nw'
 export LC_CTYPE=zh_CN.UTF-8
 EOF
 
-cat >> ~/.xsessionrc <<EOF
+if [ ! -f ~/.xsessionrc ];then
+    cat >> ~/.xsessionrc <<EOF
 export PATH=$PATH:/home/thomas/p4/bin
 source /home/thomas/tools/p4env n
 alias ec='emacsclient -nw'
 export LC_CTYPE=zh_CN.UTF-8
 EOF
+fi
