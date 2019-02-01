@@ -13,7 +13,7 @@ git config --global user.name "thomaszhang"
 
 #sudo apt-get install emacs-25
 sudo apt install wget
-sudo apt install fcitx fcitx-googlepinyin fcitx-ui-classic fcitx-frontend-gtk3 fcitx-frontend-gtk
+sudo apt install fcitx fcitx-googlepinyin fcitx-ui-classic fcitx-frontend-gtk3
 sudo apt-get remove fcitx-frontend-qt4 fcitx-frontend-qt5 fcitx-qimpanel
 
 sudo apt-get install gedit
@@ -21,24 +21,35 @@ sudo apt-get install android-tools-adb android-tools-fastboot
 
 sudo apt-get install libncurses5-dev
 sudo apt-get install build-essential texinfo libx11-dev libxpm-dev libjpeg-dev libpng-dev libgif-dev libtiff-dev libgtk2.0-dev  libgtk-3-dev
-cd ~
-mkdir emacs-source
-cd emacs-source
-wget http://mirrors.ustc.edu.cn/gnu/emacs/emacs-25.3.tar.gz
-tar -xzf emacs-25.3.tar.gz
-./configure
-make
-sudo make install
+
+which emacs
+if [ $? -ne 0 ]; then
+	cd ~
+	if [ ! -d emacs-source ]; then
+		mkdir emacs-source
+		cd emacs-source
+		wget http://mirrors.ustc.edu.cn/gnu/emacs/emacs-25.3.tar.gz
+		tar -xzf emacs-25.3.tar.gz
+	fi
+	cd ~/emacs-source/emacs-25.3
+	./configure
+	make
+	sudo make install
+fi
 
 sudo apt-get install samba
 
 cd ~
-git clone http://github.com/zht304/config.git
+if [ ! -d config ];then
+	git clone http://github.com/zht304/config.git
+fi
 ln -s config/.emacs.d .emacs.d
 ln -s config/.vimrc .vimrc
 
-
-git clone http://github.com/zht304/tools.git
+if [ ! -d tools ]; then
+	git clone http://github.com/zht304/tools.git
+    sudo ln -s /home/thomas/tools/myp4 /usr/bin/myp4
+fi
 
 sudo cat >> /etc/locale.gen <<EOF
 zh_CN
@@ -59,9 +70,11 @@ alias ec='emacsclient -nw'
 export LC_CTYPE=zh_CN.UTF-8
 EOF
 
-cat >> ~/.xsessionrc <<EOF
+if [ ! -f ~/.xsessionrc ];then
+    cat >> ~/.xsessionrc <<EOF
 export PATH=$PATH:/home/thomas/p4/bin
 source /home/thomas/tools/p4env n
 alias ec='emacsclient -nw'
 export LC_CTYPE=zh_CN.UTF-8
 EOF
+fi
