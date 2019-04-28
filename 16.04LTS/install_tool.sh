@@ -22,6 +22,8 @@ sudo apt-get install android-tools-adb android-tools-fastboot
 sudo apt-get install libncurses5-dev
 sudo apt-get install build-essential texinfo libx11-dev libxpm-dev libjpeg-dev libpng-dev libgif-dev libtiff-dev libgtk2.0-dev  libgtk-3-dev
 
+sudo apt-get install fonts-wqy-microhei fonts-wqy-zenhei
+
 which emacs
 if [ $? -ne 0 ]; then
 	cd ~
