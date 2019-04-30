@@ -39,6 +39,17 @@ if [ $? -ne 0 ]; then
 	sudo make install
 fi
 
+which gtags
+if [ $? -ne 0 ];then
+	cd ~
+	wget http://mirrors.ustc.edu.cn/gnu/global/global-6.6.3.tar.gz
+	tar -xf global-6.6.3.tar.gz
+	cd global*
+	./configure
+	make
+	sudo make install
+fi
+
 sudo apt-get install samba
 
 cd ~
@@ -53,16 +64,15 @@ if [ ! -d tools ]; then
     sudo ln -s /home/thomas/tools/myp4 /usr/bin/myp4
 fi
 
-sudo cat >> /etc/locale.gen <<EOF
-zh_CN
-zh_CN.gb18030
-zh_CN.gb2312
-zh_CN.gbk
-zh_CN.utf8
-en_US
-en_US.iso88591
-en_US.utf8
-EOF
+sudo sh -c 'cat > /etc/locale.gen <<EOF
+zh_CN GB2312
+zh_CN.GB18030 GB18030
+zh_CN.GBK GBK
+zh_CN.UTF-8 UTF-8
+en_US ISO-8859-1
+en_US.ISO-8859-15 ISO-8859-15
+en_US.UTF-8 UTF-8
+EOF'
 sudo locale-gen
 
 cat >> ~/.bashrc <<EOF
