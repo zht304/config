@@ -1,0 +1,68 @@
+
+# refer to  http://ju.outofmemory.cn/entry/138392
+#sudo apt install perlbrew
+#mkdir -p  ~/perl5/perlbrew/dists
+#mkdir -p ~/perl5/perlbrew/build
+
+cpan
+#vim ~/.cpan/CPAN/MyConfig.pm    url set to http://mirrors.163.com/cpan/
+cpan App::perlbrew
+perlbrew init
+
+# note for bash. add to ~/.profile won't work. will not be read.
+echo "source ~/perl5/perlbrew/etc/bashrc" >> ~/.bashrc
+exit
+#start a new shell
+perlbrew available
+#cd ~/perl5/perlbrew/dists
+#wget https://www.cpan.org/src/5.0/perl-5.22.4.tar.bz2
+# tar.gz test failed. don't know why.
+
+perlbrew install 5.22.4
+perlbrew switch perl-5.22.4
+perl -V:version
+
+
+
+#to swith with system perl.
+
+# refer to https://stackoverflow.com/questions/25188575/switching-to-the-system-perl-using-perlbrew
+
+
+To have perlbrew manage an installation of perl that wasn't installed by perlbrew, pick a name ("system" in my example) and create a link to its bin directory as follows:
+
+cd "${PERLBREW_ROOT:-$HOME/perl5/perlbrew}"
+mkdir perls/system
+ln -s /usr/bin perls/system/bin
+
+It will now appear in perlbrew list
+
+$ perlbrew list
+  ...
+  system (5.10.1)
+  5.18.2t
+* 5.20.0t
+  ...
+
+And you'll be able to use perlbrew use and perlbrew switch.
+
+$ perl -V:version
+version='5.20.0';
+
+$ perlbrew switch system
+
+$ perl -V:version
+version='5.10.1';
+
+$ bash -ic 'perl -V:version'
+version='5.10.1';
+
+This works best with installations that have the same installbin, installvendorbin (if applicable) and installsitebin directories, as returned by
+
+perl -V:'install.*bin'
+
+By the way, a similar approach can be used to create aliases for perlbrew installs. For example,
+
+ ln -s 5.26.1 perls/5.26           # Point to the latest release of a version.
+ ln -s 5.26.1 perls/project_name   # Point to the install used by a project.
+

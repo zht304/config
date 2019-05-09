@@ -79,6 +79,7 @@ cat >> ~/.bashrc <<EOF
 export PATH=$PATH:/home/thomas/p4/bin
 source /home/thomas/tools/p4env
 alias ec='emacsclient -nw'
+alias ecc='emacsclient -c'
 export LC_CTYPE=zh_CN.UTF-8
 EOF
 
@@ -87,6 +88,7 @@ if [ ! -f ~/.xsessionrc ];then
 export PATH=$PATH:/home/thomas/p4/bin
 source /home/thomas/tools/p4env n
 alias ec='emacsclient -nw'
+alias ecc='emacsclient -c'
 export LC_CTYPE=zh_CN.UTF-8
 EOF
 fi
