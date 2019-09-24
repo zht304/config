@@ -19,10 +19,10 @@
 ;; (setq-default tab-width 4)
 
 ;; Compilation
-(global-set-key (kbd "<f5>") (lambda ()
-                               (interactive)
-                               (setq-local compilation-read-command nil)
-                               (call-interactively 'compile)))
+;; (global-set-key (kbd "<f5>") (lambda ()
+;;                                (interactive)
+;;                                (setq-local compilation-read-command nil)
+;;                                (call-interactively 'compile)))
 
 ;; setup GDB
 (setq
@@ -46,6 +46,9 @@
   :init
   (projectile-global-mode)
   (setq projectile-enable-caching t))
+
+(global-set-key (kbd "<f5>") 'projectile-find-file-dwim)
+
 
 ;; Package zygospore
 (use-package zygospore
