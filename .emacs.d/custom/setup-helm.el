@@ -137,6 +137,10 @@
       :init
       (helm-projectile-on)
       (setq projectile-completion-system 'helm)
-      (setq projectile-indexing-method 'alien))))
+      (setq projectile-indexing-method 'alien)
+      (add-to-list 'projectile-globally-ignored-directories ".vscode")
+      )
+    )
+  )
 
 (provide 'setup-helm)

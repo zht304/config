@@ -69,6 +69,9 @@
 (setq org-agenda-files (list "~/org/work-todo.org" "~/org/desay.org"
                              "~/org/release.org" "~/org/bb.org"))
 
+(use-package smartparens)
+(smartparens-global-mode)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
