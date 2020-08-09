@@ -70,3 +70,9 @@
   :bind ("M-m" . er/expand-region))
 
 
+(use-package goto-chg)
+(global-set-key (kbd "C-.") 'goto-last-change)
+(global-set-key (kbd "C-,") 'goto-last-change-reverse)
+
+(use-package rainbow-delimiters)
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
