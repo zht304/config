@@ -69,4 +69,6 @@
 (use-package expand-region
   :bind ("M-m" . er/expand-region))
 
+(global-set-key [f8] 'highlight-symbol-at-point)
+(global-set-key [C-f8] 'unhighlight-regexp)
 
