@@ -241,18 +241,18 @@ Position the cursor at its begining."
 (volatile-highlights-mode t))
 
 
-(use-package smartparens
-  :ensure t
-  :init
-   (setq sp-base-key-bindings 'paredit)
-   (setq sp-autoskip-closing-pair 'always)
-   (setq sp-hybrid-kill-entire-symbol nil)
-  :config (sp-use-paredit-bindings))
+;; (use-package smartparens
+;;   :ensure t
+;;   :init
+;;    (setq sp-base-key-bindings 'paredit)
+;;    (setq sp-autoskip-closing-pair 'always)
+;;    (setq sp-hybrid-kill-entire-symbol nil)
+;;   :config (sp-use-paredit-bindings))
 
 
 (use-package clean-aindent-mode
   :ensure t
-  :config 
+  :config
   (add-hook 'prog-mode-hook 'clean-aindent-mode))
 
 (provide 'setup-editing)
