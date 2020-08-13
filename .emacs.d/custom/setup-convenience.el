@@ -58,7 +58,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package company
   :ensure t
-  :config 
+  :config
   (add-hook 'after-init-hook 'global-company-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -69,6 +69,9 @@
 (use-package expand-region
   :bind ("M-m" . er/expand-region))
 
-(global-set-key [f8] 'highlight-symbol-at-point)
-(global-set-key [C-f8] 'unhighlight-regexp)
+(require 'highlight-global)
 
+;;(global-set-key [f8] 'highlight-symbol-at-point)
+;;(global-set-key [C-f8] 'unhighlight-regexp)
+(global-set-key [f8] 'highlight-global-hl-frame-toggle)
+(global-set-key [C-f8] 'highlight-global-clear-hl-frame)
