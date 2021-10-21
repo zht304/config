@@ -8,7 +8,7 @@
 ;; hippie-expand is a better version of dabbrev-expand.
 ;; While dabbrev-expand searches for words you already types, in current;; buffers and other buffers, hippie-expand includes more sources,
 ;; such as filenames, klll ring...
-(global-set-key (kbd "M-/") 'hippie-expand) ;; replace dabbrev-expand
+;;(global-set-key (kbd "M-/") 'hippie-expand) ;; replace dabbrev-expand
 (setq
  hippie-expand-try-functions-list
  '(try-expand-dabbrev ;; Try to expand word "dynamically", searching the current buffer.
@@ -30,7 +30,7 @@
 ;;(setq ibuffer-use-other-window t) ;; always display ibuffer in another window
 
 ;; GROUP: Convenience -> Linum
-(add-hook 'prog-mode-hook 'linum-mode) ;; enable linum only in programming modes
+;; (add-hook 'prog-mode-hook 'linum-mode) ;; enable linum only in programming modes
 
 ;; GROUP: Convenience -> Whitespace
 

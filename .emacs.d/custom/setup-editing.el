@@ -5,6 +5,7 @@
       )
 
 (setq-default tab-width 4)
+(setq-default evil-shift-width tab-width)
 (setq c-default-style "linux")
 (setq c-basic-offset 4)
 
@@ -12,7 +13,7 @@
 (set-keyboard-coding-system 'utf-8)
 (set-language-environment "UTF-8")
 (prefer-coding-system 'utf-8)
-
+;;use spaces instead of tabs
 (setq-default indent-tabs-mode nil)
 (delete-selection-mode)
 (global-set-key (kbd "RET") 'newline-and-indent)
@@ -237,7 +238,7 @@ Position the cursor at its begining."
 
 (use-package volatile-highlights
   :ensure t
-  :config 
+  :config
 (volatile-highlights-mode t))
 
 
@@ -254,5 +255,17 @@ Position the cursor at its begining."
   :ensure t
   :config
   (add-hook 'prog-mode-hook 'clean-aindent-mode))
+
+(column-number-mode)
+
+;; Enable line numbers for some modes
+(dolist (mode '(text-mode-hook
+                prog-mode-hook
+                conf-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 1))))
+
+;; Override some modes which derive from the above
+(dolist (mode '(org-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 (provide 'setup-editing)
