@@ -74,7 +74,7 @@
 (smartparens-global-mode)
 
 ;; start server
-(server-start)
+;;(server-start)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

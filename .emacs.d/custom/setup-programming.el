@@ -43,17 +43,20 @@
 ;;   (setq projectile-enable-caching t))
 
 
-(use-package perspective
-  :demand t
-  ;; :bind (("C-M-k" . persp-switch)
-  ;;        ("C-M-n" . persp-next)
-  ;;        ("C-x k" . persp-kill-buffer*))
-  :custom
-  (persp-initial-frame-name "Main")
-  :config
-  ;; Running `persp-mode' multiple times resets the perspective list...
-  (unless (equal persp-mode t)
-    (persp-mode)))
+;; disable it now. it will break the emacs server connection
+;; after C-X 5 0 to close the emacsclient frame, client will not be able to
+;; create a new frame any more. i don't know why.
+;; (use-package perspective
+;;   :demand t
+;;   ;; :bind (("C-M-k" . persp-switch)
+;;   ;;        ("C-M-n" . persp-next)
+;;   ;;        ("C-x k" . persp-kill-buffer*))
+;;   :custom
+;;   (persp-initial-frame-name "Main")
+;;   :config
+;;   ;; Running `persp-mode' multiple times resets the perspective list...
+;;   (unless (equal persp-mode t)
+;;     (persp-mode)))
 
 
 (defun dw/switch-project-action ()
@@ -74,7 +77,7 @@
   :init
   (when (file-directory-p "~/code")
     (setq projectile-project-search-path '("~/code")))
-  (setq projectile-switch-project-action #'dw/switch-project-action)
+  ;; (setq projectile-switch-project-action #'dw/switch-project-action)
   (add-hook 'dired-mode-hook 'projectile-mode)
   )
 
@@ -156,15 +159,15 @@
   (setq lsp-ui-doc-position 'bottom)
   (lsp-ui-doc-show))
 
-(use-package dap-mode
-  :custom
-  (lsp-enable-dap-auto-configure nil)
-  :config
-  (dap-ui-mode 1)
-  (dap-tooltip-mode 1)
-  (require 'dap-node)
-  (require 'dap-cpptools)
-  (dap-node-setup))
+;; (use-package dap-mode
+;;   :custom
+;;   (lsp-enable-dap-auto-configure nil)
+;;   :config
+;;   (dap-ui-mode 1)
+;;   (dap-tooltip-mode 1)
+;;   (require 'dap-node)
+;;   (require 'dap-cpptools)
+;;   (dap-node-setup))
 
 
 ;; ts, js
